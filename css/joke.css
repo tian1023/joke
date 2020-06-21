@@ -1,0 +1,124 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.videoList {
+	width: 3.75rem;
+}
+.videoItem {
+	width: 100vw;
+}
+.videoItem .videoTop {
+	width: 100vw;
+	height: 75vh;
+	position: relative;	
+}
+.videoTop #img {
+	width: 100vw;
+	height: 75vh;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #000;
+}
+.videoTop button {
+	width: 100vw;
+	height: 75vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.4);
+	background-image: url(../img/play.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30%;
+}
+.videoTop h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;	
+	font-size: 0.25rem;
+	padding: 0.1rem;
+	color: #fff;
+}
+.videoTop p {
+	position: absolute;
+	left: 0;
+	bottom: 0;	
+	width: 100vw;
+	font-size: 0.2rem;
+	color: #fff;
+	height: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 0.2rem;
+}
+.videoTop p .eyeIcon {
+	width: 0.3rem;
+	height: 0.3rem;
+	display: inline-block;
+	background-image: url(../img/eye.png);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: 100%;	
+}
+.videoBottom {
+	width: 100vw;
+	height: 1rem;
+	display: flex;
+	align-items: center;
+	font-size: 0.2rem;
+	padding: 0 0.1rem;
+}
+.videoBottom img {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 0.25rem;
+}
+.videoBottom .right {
+	flex: 1;
+	height: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 0.1rem;
+}
+.videoBottom .right .comment {
+	color: #999;
+}
+.playpage {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.playpage video{
+	width: 100vw;
+}
+.close {
+	width: 0.4rem;
+	height: 0.4rem;
+	position: absolute;
+	right: 0.15rem;
+	top: 0.15rem;
+	background-image: url(../img/close.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50%;
+	background-color: rgba(0,0,0,.6);
+	border-radius: 0.2rem;
+}
+.loading {
+	width: 100vw;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	text-align: center;
+	font-size: 0.2rem;
+	background-color: #efefef;
+}

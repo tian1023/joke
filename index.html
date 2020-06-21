@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>笑话段子</title>
+		<script type="text/javascript" src="js/layout.js" ></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/joke.css" />
+	</head>
+	<body>
+		<div class="videoList">
+			<!--<div class="videoItem">
+				<div class="videoTop">
+					<div id="img" style="background-image: url(http://wimg.spriteapp.cn/picture/2020/0613/5ee3cb58437c6_wpd.jpg);"></div>
+					<button type="button"></button>
+					<h3 class="title">这年轻人。咋就反了呢</h3>
+					<p>
+						<span class="eyeIcon"></span>
+						<span class="num">10</span>次播放
+					</p>
+				</div>
+				<div class="videoBottom">
+					<img id="header" src="http://wimg.spriteapp.cn/profile/large/2019/07/03/5d1c79eae8c54_mini.jpg"/>
+					<div class="right">
+						<div class="author">柏拉图</div>
+						<div class="comment">习惯性的动作，还提了一下衣服？讲究</div>
+					</div>
+				</div>				
+			</div>-->
+
+		</div>
+		<div class="loading">刷新页面</div>
+
+		<div class="playpage">
+			<video src="http://uvideo.spriteapp.cn/video/2020/0613/5ee3cb58437c6_wpd.mp4" controls="controls"></video>
+			<span class="close"></span>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/Ajax-fn.js" ></script>
+		<script type="text/javascript">
+			var loadingDom = document.querySelector(".loading");
+			var videoListDom = document.querySelector(".videoList");
+			var playPageDom = document.querySelector(".playpage");
+			var videoDom = document.querySelector(".playpage video");
+			var closeDom =document.querySelector(".close");
+			var videoList = [];
+			var pageNum = 1;
+			var Url = "https://api.apiopen.top/getJoke?page=1&count=10&type=video";
+			getAjax(Url,function(xhr){
+				var resObj = JSON.parse(xhr.response);
+				console.log(resObj)
+				
+				videoList = resObj.result;
+				renderVideoList(videoList);
+			})
+			
+			function renderVideoList(videoList){
+				videoList.forEach(function(item,index){
+					var videoItem = document.createElement("div");
+					videoItem.className = "videoItem";
+					videoItem.innerHTML = `
+					<div class="videoTop">
+						<div id="img" style="background-image: url(${item.thumbnail})"></div>
+						<button type="button" data-index="${index}"></button>
+						<h3 class="title">${item.text}</h3>
+						<p>
+							<span class="eyeIcon"></span>
+							<span class="num">${item.up}</span>次播放
+						</p>
+					</div>
+					<div class="videoBottom">
+						<img id="header" src="${item.header}"/>
+						<div class="right">
+							<div class="author">${item.name}</div>
+							<div class="comment">${item.top_comments_content}</div>
+						</div>
+					</div>
+					`
+					videoListDom.appendChild(videoItem);
+				})
+			}
+			
+			videoListDom.addEventListener("click",function(e){
+				if(e.target.tagName=="BUTTON"){
+					var index = e.target.dataset.index;
+					var item = videoList[index];
+					console.log(item);
+					playPageDom.style.display = "block";
+					videoDom.src = item.video;
+					videoDom.play();
+				}
+			})
+			
+			closeDom.onclick = function(){
+				playPageDom.style.display = "none";
+				videoDom.pause();
+			}
+			
+			loadingDom.onclick = function(){
+				pageNum++;
+				videoListDom.innerHTML = "";
+				var Url = "https://api.apiopen.top/getJoke?page="+pageNum+"&count=10&type=video";
+				getAjax(Url,function(xhr){
+					var resObj = JSON.parse(xhr.response);
+					console.log(resObj)
+					
+					videoList = resObj.result;
+//					videoListDom.innerHTML = "";
+					renderVideoList(videoList);
+//					scrollTo(0,0);
+				})
+			}
+		</script>
+	</body>
+</html>
